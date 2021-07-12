@@ -96,7 +96,7 @@ cron "5 8,13,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/mast
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       token = await getJxToken();
       if (!token) continue
-      $.canHelp = true
+      $.canHelp = false
       if ($.shareCodes && $.shareCodes.length) console.log(`\n\n寻宝大作战，自己账号内部循环互助\n\n`);
       for (let id of $.shareCodes) {
         console.log(`账号${$.UserName} 去参加 ${id} 寻宝大作战`)
@@ -139,8 +139,8 @@ cron "5 8,13,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/mast
       await treasureHunt();
   
       //偷财富
-      await $.wait(3000);
-      await friendCircle();
+      //await $.wait(3000);
+      //await friendCircle();
   
       //成就任务
       await $.wait(3000);
@@ -157,35 +157,35 @@ cron "5 8,13,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/mast
       await openPeriodBox();
   
       //出岛寻宝大作战
-      await $.wait(3000);
-      await submitGroupId();
-      await $.wait(3000);
+      //await $.wait(3000);
+      //await submitGroupId();
+      //await $.wait(3000);
   
       // const endInfo = await getUserInfo(false);
-      await helpFriend()
-      $.result.push(
-          `【京东账号${$.index}】${$.nickName || $.UserName}`,
-          `【💵财富值】${beginInfo.ddwMoney}\n`
-      );
+     // await helpFriend()
+      //$.result.push(
+         // `【京东账号${$.index}】${$.nickName || $.UserName}`,
+         // `【💵财富值】${beginInfo.ddwMoney}\n`
+      //);
       // $.result.push(
       //     `【京东账号${$.index}】${$.nickName || $.UserName}`,
       //     `【💵财富值】任务前: ${beginInfo.ddwMoney}\n【💵财富值】任务后: ${endInfo.ddwMoney}`,
       //     `【💵财富值】净增值: ${endInfo.ddwMoney - beginInfo.ddwMoney}\n`
       // );
-    } catch (e) {
-      $.logErr(e)
-    }
-  }
-  function helpFriend() {
-    return new Promise(async resolve => {
-      $.canHelp = true
-      for (let id of $.newShareCodes.filter(vo=> !!vo && !vo.includes("GroupId"))) {
-        console.log(`去助力好友 【${id}】`)
-        if (token) await createSuperAssistUser(id);
-        await $.wait(10000);
-        await createAssistUser(id);
-        if (!$.canHelp) break
-        await $.wait(12000);
+    //} catch (e) {
+     // $.logErr(e)
+    //}
+ // }
+  //function helpFriend() {
+    //return new Promise(async resolve => {
+      //$.canHelp = true
+     // for (let id of $.newShareCodes.filter(vo=> !!vo && !vo.includes("GroupId"))) {
+       // console.log(`去助力好友 【${id}】`)
+        //if (token) await createSuperAssistUser(id);
+        //await $.wait(10000);
+       // await createAssistUser(id);
+       // if (!$.canHelp) break
+       // await $.wait(12000);
       }
       // if (token) {
       //   $.canHelp = true
@@ -553,13 +553,13 @@ cron "5 8,13,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/mast
   
   //好友圈偷财富
   function friendCircle() {
-    return new Promise(async (resolve) => {
+   return new Promise(async (resolve) => {
       $.get(taskUrl(`user/FriendCircle`, `dwPageIndex=1&dwPageSize=20`), async(err, resp, data) => {
         try {
-          //$.log(`\n好友圈列表\n${data}`);
+         $.log(`\n好友圈列表\n${data}`);
           if (err) {
             console.log(`${JSON.stringify(err)}`)
-            console.log(`${$.name} FriendCircle API请求失败，请检查网路重试`)
+           console.log(`${$.name} FriendCircle API请求失败，请检查网路重试`)
           } else {
             const {MomentList = [],iRet,sErrMsg,strShareId} = JSON.parse(data);
             for (moment of MomentList) {
