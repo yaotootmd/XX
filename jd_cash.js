@@ -27,7 +27,7 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-let helpAuthor = true;
+let helpAuthor = false;
 const randomCount = $.isNode() ? 0 : 0;
 let cash_exchange = false;//是否消耗2元红包兑换200京豆，默认否
 const inviteCodes = [
@@ -90,7 +90,7 @@ async function jdCash() {
   $.signMoney = 0;
   await index()
   await shareCodesFormat()
-  await helpFriends()
+  //await helpFriends()
   await getReward()
   await getReward('2');
   $.exchangeBeanNum = 0;
@@ -191,14 +191,14 @@ function index(info=false) {
     })
   })
 }
-async function helpFriends() {
-  $.canHelp = true
-  for (let code of $.newShareCodes) {
-    console.log(`去帮助好友${code['inviteCode']}`)
-    await helpFriend(code)
-    if(!$.canHelp) break
-    await $.wait(1000)
-  }
+//async function helpFriends() {
+  //$.canHelp = true
+  //for (let code of $.newShareCodes) {
+    //console.log(`去帮助好友${code['inviteCode']}`)
+    //await helpFriend(code)
+   // if(!$.canHelp) break
+   // await $.wait(1000)
+ // }
   // if (helpAuthor && $.authorCode) {
   //   for(let helpInfo of $.authorCode){
   //     console.log(`去帮助好友${helpInfo['inviteCode']}`)
@@ -208,35 +208,35 @@ async function helpFriends() {
   //   }
   // }
 }
-function helpFriend(helpInfo) {
-  return new Promise((resolve) => {
-    $.get(taskUrl("cash_mob_assist", {...helpInfo,"source":1}), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          if (safeGet(data)) {
-            data = JSON.parse(data);
-            if( data.code === 0 && data.data.bizCode === 0){
-              console.log(`助力成功，获得${data.data.result.cashStr}`)
+//function helpFriend(helpInfo) {
+  //return new Promise((resolve) => {
+    //$.get(taskUrl("cash_mob_assist", {...helpInfo,"source":1}), (err, resp, data) => {
+      //try {
+        //if (err) {
+        //  console.log(`${JSON.stringify(err)}`)
+         // console.log(`${$.name} API请求失败，请检查网路重试`)
+       // } else {
+          //if (safeGet(data)) {
+           // data = JSON.parse(data);
+            //if( data.code === 0 && data.data.bizCode === 0){
+              //console.log(`助力成功，获得${data.data.result.cashStr}`)
               // console.log(data.data.result.taskInfos)
-            } else if (data.data.bizCode===207){
-              console.log(data.data.bizMsg)
-              $.canHelp = false
-            } else{
-              console.log(data.data.bizMsg)
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
+           // } else if (data.data.bizCode===207){
+              //console.log(data.data.bizMsg)
+              //$.canHelp = false
+           // } else{
+             // console.log(data.data.bizMsg)
+           // }
+         // }
+       // }
+     // } catch (e) {
+      //  $.logErr(e, resp)
+      //} finally {
+       // resolve(data);
+     // }
+    //})
+ // })
+//}
 function doTask(type,taskInfo) {
   return new Promise((resolve) => {
     $.post(taskUrl("cash_doTask",{"taskInfo":taskInfo,"type":type}), (err, resp, data) => {
