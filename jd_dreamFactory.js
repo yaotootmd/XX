@@ -81,7 +81,7 @@ if ($.isNode()) {
       $.pickEle = 0;
       $.pickFriendEle = 0;
       $.friendList = [];
-      $.canHelpFlag = true;//能否助力朋友(招工)
+      $.canHelpFlag = false;//能否助力朋友(招工)
       $.tuanNum = 0;//成团人数
       await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
@@ -107,7 +107,7 @@ if ($.isNode()) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.isLogin = true;
-      $.canHelp = true;//能否参团
+      $.canHelp = false;//能否参团
       await TotalBean();
       if (!$.isLogin) {
         continue
@@ -243,34 +243,34 @@ function collectElectricity(facId = $.factoryId, help = false, master) {
 }
 
 // 投入电力
-function investElectric() {
-  return new Promise(async resolve => {
+//function investElectric() {
+ // return new Promise(async resolve => {
     // const url = `/dreamfactory/userinfo/InvestElectric?zone=dream_factory&productionId=${$.productionId}&sceneval=2&g_login_type=1`;
-    $.get(taskurl('userinfo/InvestElectric', `productionId=${$.productionId}`, `_time,productionId,zone`), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          if (safeGet(data)) {
-            data = JSON.parse(data);
-            if (data.ret === 0) {
-              console.log(`成功投入电力${data.data.investElectric}电力`);
-              message += `【投入电力】投入成功，共计 ${data.data.investElectric} 电力\n`;
-            } else {
-              console.log(`投入失败，${data.msg}`);
-              message += `【投入电力】投入失败，${data.msg}\n`;
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
+   // $.get(taskurl('userinfo/InvestElectric', `productionId=${$.productionId}`, `_time,productionId,zone`), (err, resp, data) => {
+      //try {
+       // if (err) {
+          //console.log(`${JSON.stringify(err)}`)
+         // console.log(`${$.name} API请求失败，请检查网路重试`)
+        //} else {
+         // if (safeGet(data)) {
+           // data = JSON.parse(data);
+            //if (data.ret === 0) {
+              //console.log(`成功投入电力${data.data.investElectric}电力`);
+              //message += `【投入电力】投入成功，共计 ${data.data.investElectric} 电力\n`;
+           // } else {
+             // console.log(`投入失败，${data.msg}`);
+             //message += `【投入电力】投入失败，${data.msg}\n`;
+           // }
+        //  }
+        //}
+     // } catch (e) {
+       // $.logErr(e, resp)
+     // } finally {
+        //resolve();
+      //}
+    //})
+ // })
+//}
 
 // 初始化任务
 function taskList() {
