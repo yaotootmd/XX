@@ -93,7 +93,7 @@ const urlSchema = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%2
 async function jdFruit() {
   subTitle = `【京东账号${$.index}】${$.nickName}`;
   try {
-    await initForFarm();
+    //await initForFarm();
     if ($.farmInfo.farmUserPro) {
       // option['media-url'] = $.farmInfo.farmUserPro.goodsImage;
       message = `【水果名称】${$.farmInfo.farmUserPro.name}\n`;
