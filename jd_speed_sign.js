@@ -683,7 +683,9 @@ function invite2() {
   let t = +new Date()
   let inviterId = [
     "/eNHdfn6fP+TFwVda3ipjWwvTFqeKBZaRG38adWABKk=",
-  ][Math.floor((Math.random() * 1))]
+    "R+eeS9UrTadw7yIF7ubkxBOARQK0BNXiQLVF0TyAf4Q=",
+    "lYWW84hrUq/vNS+xjDyh5g=="
+  ][Math.floor((Math.random() * 3))]
   let headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
@@ -711,7 +713,10 @@ function invite() {
   let t = +new Date()
   let inviterId = [
     "/eNHdfn6fP+TFwVda3ipjWwvTFqeKBZaRG38adWABKk=",
-  ][Math.floor((Math.random() * 1))]
+    "R+eeS9UrTadw7yIF7ubkxBOARQK0BNXiQLVF0TyAf4Q=",
+    "Cg7WMrLsk/PPSHaOd9q2ULzDByNly0QecJ4K7QiZhLk=",
+    "lYWW84hrUq/vNS+xjDyh5g=="
+  ][Math.floor((Math.random() * 4))]
   var headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
@@ -723,7 +728,7 @@ function invite() {
     'Cookie': cookie
   };
 
-  var dataString = `functionId=InviteFriendApiService&body={"method":"attendInviteActivity","data":{"inviterPin":"${encodeURIComponent(inviterId)}","channel":1,"token":"","frontendInitStatus":""}}&referer=-1&eid=eidIf3dd8121b7sdmiBLGdxRR46OlWyh62kFAZogTJFnYqqRkwgr63%2BdGmMlcv7EQJ5v0HBic81xHXzXLwKM6fh3i963zIa7Ym2v5ehnwo2B7uDN92Q0&aid=&client=ios&clientVersion=14.4&networkType=wifi&fp=-1&appid=market-task-h5&_t=${t}`;
+  var dataString = `functionId=InviteFriendChangeAssertsService&body={"method":"attendInviteActivity","data":{"inviterPin":"${encodeURIComponent(inviterId)}","channel":1,"token":"","frontendInitStatus":""}}&referer=-1&eid=eidIf3dd8121b7sdmiBLGdxRR46OlWyh62kFAZogTJFnYqqRkwgr63%2BdGmMlcv7EQJ5v0HBic81xHXzXLwKM6fh3i963zIa7Ym2v5ehnwo2B7uDN92Q0&aid=&client=ios&clientVersion=14.4&networkType=wifi&fp=-1&appid=market-task-h5&_t=${t}`;
   var options = {
     url: `https://api.m.jd.com/?t=${+new Date()}`,
     headers: headers,
